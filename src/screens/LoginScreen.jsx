@@ -8,6 +8,7 @@ import {
   useColorScheme,
   ScrollView,
 } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function LoginScreen({ navigation }) {
   const scheme = useColorScheme(); 
@@ -36,14 +37,6 @@ export default function LoginScreen({ navigation }) {
           <Text style={styles.tabTextActive}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tabInactive}>
-          <Text
-            style={[
-              styles.tabTextInactive,
-              { color: isDark ? "#a0b3bd" : "#617c89" },
-            ]}
-          >
-            Sign Up
-          </Text>
         </TouchableOpacity>
       </View>
 
@@ -88,7 +81,7 @@ export default function LoginScreen({ navigation }) {
       {/* Login Button */}
       <TouchableOpacity
         style={[styles.loginButton, { backgroundColor: "#13a4ec" }]}
-        onPress={() => navigation.replace('Home')} 
+        onPress={() => navigation.replace("MainTabs", {screen: 'Home'})} 
       >
         <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
@@ -97,7 +90,9 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.signupContainer}>
         <Text style={{ color: isDark ? "#a0b3bd" : "#617c89" }}>
           Don't have an account?{" "}
-          <Text style={{ color: "#13a4ec", fontWeight: "600" }}>Sign Up</Text>
+          <Text 
+          onPress={() => navigation.replace("SignUpScreen")}
+          style={{ color: "#13a4ec", fontWeight: "600" }}>Sign Up</Text>
         </Text>
       </View>
     </ScrollView>
@@ -133,7 +128,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tabInactive: {
-    flex: 1,
+    flex:0,
     paddingVertical: 12,
     alignItems: "center",
   },

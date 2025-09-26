@@ -1,124 +1,146 @@
 import React from "react";
-import { View, Text, ScrollView, TouchableOpacity, Button } from "react-native";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
-const sensors = [
-  { name: "Heart Rate", icon: "favorite", status: "Active", color: "green" },
-  { name: "Stress", icon: "psychology", status: "Active", color: "green" },
-  { name: "Sleep Tracker", icon: "bedtime", status: "Active", color: "green" },
-  { name: "Sleep Quality", icon: "mood", status: "Active", color: "green" },
-];
+export default function DeviceInfo({ navigation }) {
+  const sensors = [
+    { name: "Heart Rate", icon: "heart", status: "Active", color: "green" },
+    { name: "Stress", icon: "brain", status: "Active", color: "green" },
+    { name: "Sleep Tracker", icon: "bed", status: "Active", color: "green" },
+    { name: "Sleep Quality", icon: "mood", status: "Active", color: "green" },
+  ];
 
-const deviceInfo = [
-  { label: "Model", value: "Model X1" },
-  { label: "Framework Version", value: "v2.3.1" },
-  { label: "Serial Number", value: "1234567890" },
-];
+  const deviceInfo = [
+    { label: "Model", value: "Model X1" },
+    { label: "Framework Version", value: "v2.3.1" },
+    { label: "Serial Number", value: "1234567890" },
+  ];
 
-const DeviceInfo = () => {
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-[#101c22]">
+    <View style={styles.container}>
       {/* Header */}
-      <View className="flex-row items-center justify-between p-4 bg-white/80 dark:bg-[#101c22]/80">
-        <TouchableOpacity>
-          <MaterialIcons name="arrow-back" size={24} color="#111827" />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={24} color="#111" />
         </TouchableOpacity>
-        <Text className="text-lg font-bold text-center text-gray-900 dark:text-white flex-1">
-          Device Info
-        </Text>
-        <View style={{ width: 32 }} /> {/* placeholder for alignment */}
+        <Text style={styles.headerTitle}>Device Info</Text>
+        <View style={{ width: 24 }} />
       </View>
 
-      <ScrollView className="flex-1 p-4">
+      {/* Content */}
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Device Health */}
-        <Text className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Device Health
-        </Text>
-        <View className="flex-row flex-wrap justify-between gap-3">
-          <View className="bg-white dark:bg-gray-800 rounded-xl p-4 w-[30%] mb-3">
-            <Text className="font-bold text-gray-900 dark:text-white">Battery</Text>
-            <Text className="text-gray-500 dark:text-gray-400">85%</Text>
+        <Text style={styles.sectionTitle}>Device Health</Text>
+        <View style={styles.healthGrid}>
+          <View style={styles.healthCard}>
+            <Text style={styles.healthLabel}>Battery</Text>
+            <Text style={styles.healthValue}>85%</Text>
           </View>
-          <View className="bg-white dark:bg-gray-800 rounded-xl p-4 w-[30%] mb-3">
-            <Text className="font-bold text-gray-900 dark:text-white">Connection</Text>
-            <Text className="text-green-500">Connected</Text>
+          <View style={styles.healthCard}>
+            <Text style={styles.healthLabel}>Connection</Text>
+            <Text style={[styles.healthValue, { color: "green" }]}>Connected</Text>
           </View>
-          <View className="bg-white dark:bg-gray-800 rounded-xl p-4 w-[30%] mb-3">
-            <Text className="font-bold text-gray-900 dark:text-white">Last Sync</Text>
-            <Text className="text-gray-500 dark:text-gray-400">2 hours ago</Text>
+          <View style={styles.healthCard}>
+            <Text style={styles.healthLabel}>Last Sync</Text>
+            <Text style={styles.healthValue}>2 hours ago</Text>
           </View>
         </View>
 
         {/* Sensors */}
-        <Text className="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-8">
-          Sensors
-        </Text>
-        <View className="flex-row flex-wrap justify-between gap-4">
+        <Text style={[styles.sectionTitle, { marginTop: 24 }]}>Sensors</Text>
+        <View style={styles.sensorsGrid}>
           {sensors.map((sensor) => (
-            <View
-              key={sensor.name}
-              className="bg-white dark:bg-gray-800 rounded-xl p-4 w-[48%] mb-4 flex items-center justify-center"
-            >
-              <MaterialIcons
-                name={sensor.icon}
-                size={36}
-                color="#13a4ec"
-              />
-              <Text className="font-bold text-gray-900 dark:text-white mt-2 text-center">
-                {sensor.name}
-              </Text>
-              <Text className="text-green-500 text-xs mt-1">{sensor.status}</Text>
+            <View key={sensor.name} style={styles.sensorCard}>
+              <MaterialCommunityIcons name={sensor.icon} size={32} color="#13a4ec" />
+              <Text style={styles.sensorName}>{sensor.name}</Text>
+              <Text style={{ color: sensor.color, fontSize: 12 }}>{sensor.status}</Text>
             </View>
           ))}
         </View>
 
         {/* Device Information */}
-        <Text className="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-8">
-          Device Information
-        </Text>
-        <View className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden">
-          {deviceInfo.map((info, idx) => (
+        <Text style={[styles.sectionTitle, { marginTop: 24 }]}>Device Information</Text>
+        <View style={styles.infoCard}>
+          {deviceInfo.map((info, index) => (
             <View
               key={info.label}
-              className={`flex-row justify-between p-4 ${
-                idx !== deviceInfo.length - 1 ? "border-b border-gray-200 dark:border-gray-700" : ""
-              }`}
+              style={[
+                styles.infoRow,
+                index < deviceInfo.length - 1 && { borderBottomWidth: 1, borderBottomColor: "#ccc" },
+              ]}
             >
-              <Text className="text-gray-500 dark:text-gray-400">{info.label}</Text>
-              <Text className="font-medium text-gray-900 dark:text-white">{info.value}</Text>
+              <Text style={styles.infoLabel}>{info.label}</Text>
+              <Text style={styles.infoValue}>{info.value}</Text>
             </View>
           ))}
         </View>
 
         {/* Confirm Update Button */}
-        <TouchableOpacity className="bg-blue-500 rounded-lg mt-8 h-12 flex items-center justify-center">
-          <Text className="text-white font-bold text-base">Confirm Framework Update</Text>
+        <TouchableOpacity style={styles.updateButton}>
+          <Text style={styles.updateButtonText}>Confirm Framework Update</Text>
         </TouchableOpacity>
       </ScrollView>
-
-      {/* Footer Navigation */}
-      <View className="flex-row justify-around border-t border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-[#101c22]/80 p-2">
-        {[
-          { label: "Dashboard", icon: "home", active: false },
-          { label: "History", icon: "history", active: false },
-          { label: "Device Info", icon: "smartphone", active: true },
-          { label: "Settings", icon: "settings", active: false },
-        ].map((tab) => (
-          <TouchableOpacity key={tab.label} className="items-center">
-            <MaterialIcons
-              name={tab.icon}
-              size={24}
-              color={tab.active ? "#13a4ec" : "#6b7280"}
-            />
-            <Text className={`text-xs ${tab.active ? "text-blue-500 font-bold" : "text-gray-400"}`}>
-              {tab.label}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    </SafeAreaView>
+    </View>
   );
-};
+}
 
-export default DeviceInfo;
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#f6f7f8" },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 16,
+    backgroundColor: "#f6f7f8",
+    borderBottomWidth: 1,
+    borderBottomColor: "#e2e2e2",
+    paddingTop: 48,
+  },
+  headerTitle: { fontSize: 18, fontWeight: "bold" },
+  scrollContainer: { padding: 16, paddingBottom: 60 },
+  sectionTitle: { fontSize: 20, fontWeight: "bold", color: "#111", marginBottom: 12 },
+  healthGrid: { flexDirection: "row", justifyContent: "space-between", flexWrap: "wrap" },
+  healthCard: {
+    width: "32%",
+    backgroundColor: "#fff",
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 12,
+  },
+  healthLabel: { fontSize: 14, fontWeight: "bold", color: "#111" },
+  healthValue: { fontSize: 12, color: "#666", marginTop: 4 },
+  sensorsGrid: { flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" },
+  sensorCard: {
+    width: "48%",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    padding: 16,
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  sensorName: { fontSize: 14, fontWeight: "bold", marginTop: 8, color: "#111", textAlign: "center" },
+  infoCard: { backgroundColor: "#fff", borderRadius: 12, overflow: "hidden" },
+  infoRow: { flexDirection: "row", justifyContent: "space-between", padding: 16 },
+  infoLabel: { fontSize: 14, color: "#666" },
+  infoValue: { fontSize: 14, fontWeight: "500", color: "#111" },
+  updateButton: {
+    backgroundColor: "#13a4ec",
+    borderRadius: 12,
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 24,
+  },
+  updateButtonText: { color: "#fff", fontWeight: "bold", fontSize: 16 },
+  footer: {
+    height: 64,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    borderTopWidth: 1,
+    borderTopColor: "#e2e2e2",
+    backgroundColor: "#f6f7f8",
+  },
+  footerItem: { justifyContent: "center", alignItems: "center" },
+  footerText: { fontSize: 10, color: "gray", marginTop: 2 },
+});

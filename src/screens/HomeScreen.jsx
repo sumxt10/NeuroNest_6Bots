@@ -29,7 +29,7 @@ export default function HomeScreen({ navigation }) {
       style={{ flex: 1, backgroundColor: isDark ? "#101c22" : "#f6f7f8" }}
     >
       {/* Scrollable content */}
-      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 120 }}>
+      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 60 }}>
         {/* Header */}
         <View
           style={[
@@ -292,59 +292,6 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
       </ScrollView>
-
-      {/* Bottom Navigation */}
-      <View
-        style={[
-          styles.bottomNav,
-          {
-            backgroundColor: isDark ? "#101c22cc" : "#f6f7f8cc",
-            borderTopColor: isDark ? "#1c1c1c" : "#e2e2e2",
-          },
-        ]}
-      >
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons name="dashboard" size={24} color="#13a4ec" />
-          <Text style={[styles.navLabel, { color: "#13a4ec" }]}>Dashboard</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("History")}
-          style={styles.navItem}
-        >
-          <MaterialIcons
-            name="history"
-            size={24}
-            color={isDark ? "#13a4ec" : "#13a4ec"}
-          />
-          <Text style={{ color: isDark ? "#13a4ec" : "#13a4ec", fontSize: 10 }}>
-            History
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons
-            name="devices"
-            size={24}
-            color={isDark ? "#a0b3bd" : "#617c89"}
-          />
-          <Text
-            style={[styles.navLabel, { color: isDark ? "#a0b3bd" : "#617c89" }]}
-          >
-            Device
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <MaterialIcons
-            name="settings"
-            size={24}
-            color={isDark ? "#a0b3bd" : "#617c89"}
-          />
-          <Text
-            style={[styles.navLabel, { color: isDark ? "#a0b3bd" : "#617c89" }]}
-          >
-            Settings
-          </Text>
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 }
@@ -354,7 +301,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: 16,
+    padding: 4,
     borderBottomWidth: 1,
   },
   headerTitle: { fontSize: 18, fontWeight: "bold" },

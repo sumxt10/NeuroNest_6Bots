@@ -1,107 +1,133 @@
 import React from "react";
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
-const preferences = [
-  { label: "Notifications", icon: "notifications" },
-  { label: "Privacy & Security", icon: "security" },
-  { label: "Device Preferences", icon: "device-hub" },
-];
+export default function Settings({ navigation }) {
+  const preferences = [
+    { name: "Notifications", icon: "bell-outline" },
+    { name: "Privacy & Security", icon: "shield-outline" },
+    { name: "Device Preferences", icon: "cellphone" },
+  ];
 
-const support = [
-  { label: "Help & Support", icon: "help-outline" },
-  { label: "App Info", icon: "info-outline" },
-];
+  const support = [
+    { name: "Help & Support", icon: "help-circle-outline" },
+    { name: "App Info", icon: "information-outline" },
+  ];
 
-const Settings = () => {
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-[#101c22]">
+    <View style={styles.container}>
       {/* Header */}
-      <View className="flex-row items-center justify-between p-4 bg-white dark:bg-[#101c22]">
-        <TouchableOpacity>
-          <MaterialIcons name="arrow-back" size={24} color="#111827" />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={24} color="#111" />
         </TouchableOpacity>
-        <Text className="flex-1 text-center text-lg font-bold text-gray-900 dark:text-white">
-          Settings
-        </Text>
-        <View style={{ width: 24 }} /> {/* placeholder for alignment */}
+        <Text style={styles.headerTitle}>Settings</Text>
+        <View style={{ width: 24 }} />
       </View>
 
-      <ScrollView className="flex-1 p-4">
-        {/* Profile Section */}
-        <View className="mb-6 flex-row items-center gap-4">
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {/* User Info */}
+        <View style={styles.userSection}>
           <Image
             source={{
               uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuCQOesBZ-xtJx3Q5eDo_pyFHO2-2E6mdK0_Y4WNvGQUrWkmrmPsf4kgqVfHscGPZhHeFjOi5IW1b5LSjTmfkJGsqOO-qb0Xtu9Qz01DCL0MxQ0_exZD8-Py4rAOUtGX2N96yBsz6qMar7-YbKA1Ffu7W19mjYBE_LhCknb54_r3REzz-Ri1dzCF0qPmLUIMLK6bzaGdAs2ijQF2NT3EWIoFoILZvtTimaYhC_J7Bx7ualeNUmKrFAfD8xBqK1FSYQT0bB0nv-zEmOM",
             }}
-            className="h-16 w-16 rounded-full"
+            style={styles.profileImage}
           />
           <View>
-            <Text className="text-xl font-bold text-gray-900 dark:text-white">
-              Sophia Carter
-            </Text>
-            <Text className="text-sm text-gray-500 dark:text-gray-400">
-              sophia.carter@email.com
-            </Text>
+            <Text style={styles.userName}>Sophia Carter</Text>
+            <Text style={styles.userEmail}>sophia.carter@email.com</Text>
           </View>
         </View>
 
-        {/* Preferences Section */}
-        <Text className="px-4 pb-2 text-sm font-semibold uppercase text-gray-500 dark:text-gray-400">
-          Preferences
-        </Text>
-        <View className="bg-white/50 dark:bg-black/20 rounded-lg divide-y divide-gray-200 dark:divide-gray-700 mb-6">
+        {/* Preferences */}
+        <Text style={styles.sectionTitle}>Preferences</Text>
+        <View style={styles.cardContainer}>
           {preferences.map((item) => (
-            <TouchableOpacity
-              key={item.label}
-              className="flex-row items-center justify-between p-4"
-            >
-              <View className="flex-row items-center gap-4">
-                <View className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900">
-                  <MaterialIcons name={item.icon} size={24} color="#13a4ec" />
+            <TouchableOpacity key={item.name} style={styles.card}>
+              <View style={styles.cardLeft}>
+                <View style={styles.iconContainer}>
+                  <MaterialCommunityIcons name={item.icon} size={24} color="#13a4ec" />
                 </View>
-                <Text className="text-base text-gray-900 dark:text-white">
-                  {item.label}
-                </Text>
+                <Text style={styles.cardText}>{item.name}</Text>
               </View>
-              <MaterialIcons name="chevron-right" size={20} color="#9ca3af" />
+              <MaterialIcons name="keyboard-arrow-right" size={20} color="#888" />
             </TouchableOpacity>
           ))}
         </View>
 
-        {/* Support Section */}
-        <Text className="px-4 pb-2 text-sm font-semibold uppercase text-gray-500 dark:text-gray-400">
-          Support
-        </Text>
-        <View className="bg-white/50 dark:bg-black/20 rounded-lg divide-y divide-gray-200 dark:divide-gray-700 mb-6">
+        {/* Support */}
+        <Text style={[styles.sectionTitle, { marginTop: 24 }]}>Support</Text>
+        <View style={styles.cardContainer}>
           {support.map((item) => (
-            <TouchableOpacity
-              key={item.label}
-              className="flex-row items-center justify-between p-4"
-            >
-              <View className="flex-row items-center gap-4">
-                <View className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900">
-                  <MaterialIcons name={item.icon} size={24} color="#13a4ec" />
+            <TouchableOpacity key={item.name} style={styles.card}>
+              <View style={styles.cardLeft}>
+                <View style={styles.iconContainer}>
+                  <MaterialCommunityIcons name={item.icon} size={24} color="#13a4ec" />
                 </View>
-                <Text className="text-base text-gray-900 dark:text-white">
-                  {item.label}
-                </Text>
+                <Text style={styles.cardText}>{item.name}</Text>
               </View>
-              <MaterialIcons name="chevron-right" size={20} color="#9ca3af" />
+              <MaterialIcons name="keyboard-arrow-right" size={20} color="#888" />
             </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
 
       {/* Logout Button */}
-      <View className="p-4 pb-8">
-        <TouchableOpacity className="w-full bg-blue-500 rounded-lg py-3 shadow-lg shadow-blue-300">
-          <Text className="text-center font-bold text-white text-base">Logout</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+      <TouchableOpacity style={styles.logoutButton}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
+    </View>
   );
-};
+}
 
-export default Settings;
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#f6f7f8" },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingLeft: 16,
+    paddingBottom: 16,
+    paddingTop: 48,
+    backgroundColor: "#f6f7f8",
+    borderBottomWidth: 1,
+    borderBottomColor: "#e2e2e2",
+  },
+  headerTitle: { fontSize: 18, fontWeight: "bold", textAlign: "center" },
+  scrollContainer: { padding: 16, paddingBottom: 60 },
+  userSection: { flexDirection: "row", alignItems: "center", marginBottom: 24, gap: 16 },
+  profileImage: { width: 64, height: 64, borderRadius: 32 },
+  userName: { fontSize: 18, fontWeight: "bold", color: "#111" },
+  userEmail: { fontSize: 14, color: "#666", marginTop: 2 },
+  sectionTitle: { fontSize: 14, fontWeight: "bold", color: "#666", marginBottom: 8, textTransform: "uppercase" },
+  cardContainer: { borderRadius: 12, backgroundColor: "#fff", overflow: "hidden" },
+  card: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  cardLeft: { flexDirection: "row", alignItems: "center", gap: 12 },
+  iconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: "rgba(19,164,236,0.2)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cardText: { fontSize: 16, color: "#111" },
+  logoutButton: {
+    marginHorizontal: 16,
+    marginBottom: 24,
+    backgroundColor: "#f00000",
+    borderRadius: 12,
+    paddingVertical: 14,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logoutText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
+});
