@@ -5,12 +5,12 @@ import { FontAwesome5, Ionicons } from "@expo/vector-icons"; // For footer icons
 
 const weeklyData = [
   { day: "Monday", episodes: 3, severity: "High", color: "red" },
-  { day: "Sunday", episodes: 2, severity: "Medium", color: "orange" },
-  { day: "Saturday", episodes: 1, severity: "Low", color: "green" },
-  { day: "Friday", episodes: 4, severity: "High", color: "red" },
-  { day: "Thursday", episodes: 2, severity: "Medium", color: "orange" },
+  { day: "Tuesday", episodes: 2, severity: "Medium", color: "orange" },
   { day: "Wednesday", episodes: 1, severity: "Low", color: "green" },
-  { day: "Tuesday", episodes: 3, severity: "High", color: "red" },
+  { day: "Thursday", episodes: 4, severity: "High", color: "red" },
+  { day: "Friday", episodes: 2, severity: "Medium", color: "orange" },
+  { day: "Saturday", episodes: 1, severity: "Low", color: "green" },
+  { day: "Sunday", episodes: 3, severity: "High", color: "red" },
 ];
 
 export default function WeeklyHistory({ navigation }) {
@@ -41,7 +41,7 @@ export default function WeeklyHistory({ navigation }) {
             </View>
             <Image
               source={{
-                uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuDBWrK-dg3RgecC9fDGv-A1c3wYhnGJOd4p2d6at5Nlr4J8ENUGFTfrLm67uM1Rt0wvtX6tT7JwzT4o4tU5SeKIc9Ao3GIg36PoFcHYwVLqjk0t57YIlQnJv-8n2YxBqI5PB7VGnBQnLTh4ysyz6TLdgwxDJjti4uwm_cS_7B1-onknpSL10a-89rwEJtcj2OV9FoFcsO1mYLuET3xF3OJkbglq7TMyp9kFF29Y91ZjHEai17ACnPsKh_0cPYAHcg8CQIiWrzgUSMU",
+                uri: "/",
               }}
               style={styles.cardImage}
             />

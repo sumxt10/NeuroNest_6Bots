@@ -30,13 +30,13 @@ export default function Settings({ navigation }) {
         <View style={styles.userSection}>
           <Image
             source={{
-              uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuCQOesBZ-xtJx3Q5eDo_pyFHO2-2E6mdK0_Y4WNvGQUrWkmrmPsf4kgqVfHscGPZhHeFjOi5IW1b5LSjTmfkJGsqOO-qb0Xtu9Qz01DCL0MxQ0_exZD8-Py4rAOUtGX2N96yBsz6qMar7-YbKA1Ffu7W19mjYBE_LhCknb54_r3REzz-Ri1dzCF0qPmLUIMLK6bzaGdAs2ijQF2NT3EWIoFoILZvtTimaYhC_J7Bx7ualeNUmKrFAfD8xBqK1FSYQT0bB0nv-zEmOM",
+              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5EQBQ0icvx4rMZ-SZo0-5AJh4xBTGPThB1g&s",
             }}
             style={styles.profileImage}
           />
           <View>
-            <Text style={styles.userName}>Sophia Carter</Text>
-            <Text style={styles.userEmail}>sophia.carter@email.com</Text>
+            <Text style={styles.userName}>Sumit Jha</Text>
+            <Text style={styles.userEmail}>sumitjha9324@email.com</Text>
           </View>
         </View>
 
